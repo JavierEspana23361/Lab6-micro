@@ -1,12 +1,3 @@
-/*Modifique el programa para realizar un ciclo for para crear hilos y un ciclo for (separado)
-para hacer su respectivo join. Cada hilo debe de imprimir “Hello world thread No. X”
-colocando el número del hilo en lugar de la “X”.
-c. Basándose en el mismo ejemplo, realice un ciclo for que cree el hilo y haga su respectivo
-join dentro del mismo ciclo. Cada hilo debe de imprimir “Hello world thread No. X”
-colocando el número del hilo en lugar de la “X”.
-*/
-
-
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
