@@ -36,6 +36,7 @@ int main(int argc, char *argv[]) {
 		**
 		** pthread_create(&id,NULL,subrutine,(void *)parameter
 		** ---------------------------------------------------------*/
+        // Creación de hilo
 		rc = pthread_create(&threadsID[t], NULL, PrintHello, (void *)&param[t]);
 
 		// Si algún hilo no pudo crearse, muestra mensaje de error
@@ -43,10 +44,15 @@ int main(int argc, char *argv[]) {
 			printf("ERROR; return code from pthread_create() is %d\n", rc);
 			exit(-1);
 		}
+
+        // Espera a que el hilo termine
+        rc = pthread_join(threadsID[t], NULL);
+
+        if (rc) { // Si no se pudo esperar al hilo, muestra mensaje de error
+            printf("ERROR; return code from pthread_join() is %d\n", rc); 
+            exit(-1);
+        }
 	}
 
-    for (t=0; t< NUM_THREADS; t++) {
-        pthread_join(threadsID[t], NULL);
-    }
 	pthread_exit(NULL);	
 }
