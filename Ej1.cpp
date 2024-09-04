@@ -1,14 +1,3 @@
-/*Desarrolle un programa que utilice Pthreads de C++, que permita determinar los números de la
-serie Fibonacci que hay entre 0 y un número, el cual debe ser ingresado por el usuario. Indicar
-que el número debe de estar entre 0 y 100. El programa debe de evaluar cada uno de los
-números dentro del rango establecido.
-Se debe calcular e imprimir el valor de la suma total de los números encontrados, en la rutina
-principal, debe implementar paso de parámetros por medio de estructuras (de ser necesario).
-La impresión debe ser amigable, para que pueda asociarse la iteración y el valor de la serie de
-Fibonacci obtenido.
-La serie de Fibonacci es una secuencia de números en la cual cada número es la suma de los
-dos números anteriores. Comienza con 0 y 1, y a partir de ahí, cada número subsiguiente es la
-suma de los dos anteriores.*/
 
 #include <iostream>
 #include <pthread.h>
@@ -20,40 +9,40 @@ suma de los dos anteriores.*/
 #include <algorithm>
 #include <sstream>
 
-using namespace std;
+using namespace std; //Se utiliza el espacio de nombres std
 
-struct datos{
-    int num;
-    int suma;
+struct datos{ //Estructura para pasar los datos a la función
+    int num; //Numero ingresado por el usuario
+    int suma; //Sumatoria de la serie
 };
 
-void *fibonacci(void *arg){
-    datos *datos = (struct datos *)arg;
-    int a = 0, b = 1, c;
-    for(int i = 0; i < datos->num; i++){
-        c = a + b;
-        a = b;
-        b = c;
-        if(c <= datos->num){
-            datos->suma += c;
-            cout << "Iteracion: " << i+1 << " - Valor: " << c << endl;
+void *fibonacci(void *arg){ //Función que realiza la sumatoria
+    datos *datos = (struct datos *)arg; //Casteo de la estructura
+    int a = 0, b = 1, c; //Variables para la operación
+    for(int i = 0; i < datos->num; i++){ //Ciclo para realizar la sumatoria
+        c = a + b; //Operación de la serie
+        a = b; //Asignación de valores
+        b = c; //Asignación de valores
+        if(c <= datos->num){ //Validación de los datos
+            datos->suma += c; //Sumatoria de la serie
+            cout << "Iteracion: " << i+1 << " - Valor: " << c << endl; //Impresión de los valores
         }
     }
-    pthread_exit(NULL);
+    pthread_exit(NULL); //Salida del hilo
 }
 
 int main(){
-    pthread_t hilo;
-    datos datos;
-    datos.suma = 0;
-    cout << "Ingrese un numero entre 0 y 100: ";
-    cin >> datos.num;
-    if(datos.num < 0 || datos.num > 100){
-        cout << "Numero fuera de rango" << endl;
-        exit(0);
+    pthread_t hilo; //Declaración del hilo
+    datos datos; //Declaración de la estructura
+    datos.suma = 0; //Inicialización de la sumatoria
+    cout << "Ingrese un numero entre 0 y 100: "; //Solicitud de datos al usuario
+    cin >> datos.num; //Ingreso de datos
+    if(datos.num < 0 || datos.num > 100){ //Validación de los datos
+        cout << "Numero fuera de rango" << endl; //Mensaje de error
+        exit(0); //Salida del programa
     }
-    pthread_create(&hilo, NULL, fibonacci, (void *)&datos);
-    pthread_join(hilo, NULL);
-    cout << "Suma total: " << datos.suma << endl;
-    return 0;
+    pthread_create(&hilo, NULL, fibonacci, (void *)&datos); //Creación del hilo
+    pthread_join(hilo, NULL); //Espera a que el hilo termine
+    cout << "Suma total: " << datos.suma << endl; //Impresión del resultado
+    return 0; //Retorno del programa
 }
