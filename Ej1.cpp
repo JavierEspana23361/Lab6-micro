@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <sstream>
 
-using namespace std; //Se utiliza el espacio de nombres std
+using namespace std; 
 
 struct datos{ //Estructura para pasar los datos a la función
     int num; //Numero ingresado por el usuario
