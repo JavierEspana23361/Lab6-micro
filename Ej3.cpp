@@ -1,8 +1,3 @@
-/*Desarrolle un programa que utilice Pthreads de C++, que realice el cálculo de valor de
-convergencia para la siguiente serie geométrica for (int j = 0; j < i; j++){
-        (operate = (-1) ^ (j + 1))/j;
-        operation += operate;
-    }*/
 
 #include <iostream>
 #include <pthread.h>
